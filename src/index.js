@@ -4,20 +4,20 @@ const caminhoArquivo = process.argv;
 const link = caminhoArquivo[2]
 
 fs.readFile(link,'utf-8', (erro,texto)=>{
-    quebraEmParagrafos(texto);
-    //verificaPalavrasDuplicadas(texto);
+    contaPalavras(texto)
 })
 
-//criar um array com as palavras
-//contar as ocorrencias
-//objeto com cada frequencia de palavras
-
-function quebraEmParagrafos(texto){
-    const paragrafos = texto.toLowerCase().split("\n")
-    const contagem = paragrafos.map(paragrafo =>{
+function contaPalavras(texto){
+    const paragrafos = extraiParagrafos(texto);
+    const contagem = paragrafos.flatMap((paragrafo)=>{
+        if (!paragrafo) return []
         return verificaPalavrasDuplicadas(paragrafo)
     })
     console.log(contagem)
+}
+
+function extraiParagrafos(texto){
+    return texto.toLowerCase().split("\n");
 }
 
 function limpaPalavras(palavra){
@@ -31,7 +31,6 @@ function validaTamanhoPalavra(palavra){
 function verificaPalavrasDuplicadas(texto){
     const listaPalavras = texto.split(" ")
     const resultado = {}
-    // objeto[propriedade] = valor;
     listaPalavras.forEach(palavra => {
         if (validaTamanhoPalavra(palavra)){
             const palavraLimpa = limpaPalavras(palavra)
