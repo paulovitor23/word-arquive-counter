@@ -1,5 +1,8 @@
-const fs = require('fs');
-const trataErros = require('./trataErros')
+import fs from 'fs';
+import trataErros from './trataErros.js';
+import {contaPalavras} from './index.js';
+
+
 
 const caminhoArquivo = process.argv;
 const link = caminhoArquivo[2]
